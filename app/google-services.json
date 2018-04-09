@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "539841274518",
+    "firebase_url": "https://tutone-f3f54.firebaseio.com",
+    "project_id": "tutone-f3f54",
+    "storage_bucket": "tutone-f3f54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539841274518:android:7daef60c98a6dbea",
+        "android_client_info": {
+          "package_name": "vn.miraway.tutone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539841274518-uatmv6srab4l6lbpb8jqpgpd34h23ie8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.miraway.tutone",
+            "certificate_hash": "f833349d1b2aa4645e30371e8679da984b798066"
+          }
+        },
+        {
+          "client_id": "539841274518-d81rd8jiukt7vtk9l3sil4vk8pfr43qb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV3cMPRvVgauZbnC6LbhnkDamnFBh5s4Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "539841274518-d81rd8jiukt7vtk9l3sil4vk8pfr43qb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
