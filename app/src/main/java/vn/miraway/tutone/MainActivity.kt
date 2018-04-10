@@ -10,7 +10,5 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val refreshedToken = FirebaseInstanceId.getInstance().token
-        Log.d("fcm_token", "fcm_token: " + refreshedToken!!)
     }
 }
