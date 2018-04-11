@@ -9,7 +9,6 @@ class TutoneApplication:Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Log.d("application_create","created!")
         val appComponent = DaggerAppComponent.builder()
                 .restModule(RestModule())
                 .build()

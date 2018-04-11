@@ -5,12 +5,13 @@ import retrofit2.Retrofit
 import vn.miraway.tutone.modules.RestModule
 import vn.miraway.tutone.network.ToneApi
 import vn.miraway.tutone.ui.tone.ToneFragment
+import vn.miraway.tutone.views.fragments.BaseFragment
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = arrayOf(RestModule::class))
 public interface AppComponent {
     fun retrofit():Retrofit
-    fun inject(toneFragment:ToneFragment)
+    fun inject(toneFragment: ToneFragment)
     fun toneApi():ToneApi
 }
