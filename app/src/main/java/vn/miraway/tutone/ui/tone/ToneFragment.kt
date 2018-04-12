@@ -46,24 +46,19 @@ class ToneFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentToneBinding>(inflater, R.layout.fragment_tone, container, false)
-
+        val toneAdapter = ToneAdapter(this.context)
         toneApi.getTones()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .doOnTerminate{this.stopLoading()}
                 .map { res->res.data }
                 .subscribe(
-                        {res->Log.d("response_body",res.toString())},
+                        {
+                            res->toneAdapter.tones = res!!
+                            binding.tones = toneAdapter
+                        },
                         {err->Log.d("response_err",err.message)}
                 )
-        val toneAdapter = ToneAdapter(this.context)
-        var tones = ArrayList<Tone>()
-        tones.add(Tone("ds", "dasdasd", "dasd", "dasdsa"))
-        tones.add(Tone("ds", "dasdasd", "dasd", "dasdsa"))
-        tones.add(Tone("ds", "dasdasd", "dasd", "dasdsa"))
-        tones.add(Tone("ds", "dasdasd", "dasd", "dasdsa"))
-        toneAdapter.tones = tones
-        binding.tones = toneAdapter
 //        return inflater.inflate(R.layout.fragment_tone, container, false)
         return binding.root
     }

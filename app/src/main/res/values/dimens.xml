@@ -2,4 +2,69 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">180dp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="profile_width">75dp</dimen>
+    <dimen name="profile_height">75dp</dimen>
+
+    <dimen name="text_size_tiny">9sp</dimen>
+    <dimen name="text_size_small">11sp</dimen>
+    <dimen name="text_size_smallx">12sp</dimen>
+    <dimen name="text_size_smallxx">13sp</dimen>
+    <dimen name="text_size_smallxxx">14sp</dimen>
+    <dimen name="text_size_normal">15sp</dimen>
+    <dimen name="text_size_normalx">16sp</dimen>
+    <dimen name="text_size_normalxx">17sp</dimen>
+    <dimen name="text_size_normalxxx">18sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_largex">22sp</dimen>
+    <dimen name="text_size_largexx">25sp</dimen>
+    <dimen name="text_size_largexxx">28sp</dimen>
+    <dimen name="text_size_huge">32sp</dimen>
+    <dimen name="text_size_hugex">35sp</dimen>
+    <dimen name="text_size_hugexx">38sp</dimen>
+
+    <dimen name="margin_normal">15dp</dimen>
+    <dimen name="margin_normalx">17dp</dimen>
+    <dimen name="margin_normalxx">20dp</dimen>
+    <dimen name="margin_normalxxx">23dp</dimen>
+    <dimen name="margin_large">25dp</dimen>
+    <dimen name="margin_largex">28dp</dimen>
+    <dimen name="margin_largexx">30dp</dimen>
+    <dimen name="margin_largexxx">40dp</dimen>
+    <dimen name="margin_huge">45dp</dimen>
+    <dimen name="margin_hugex">45dp</dimen>
+    <dimen name="margin_hugexx">52dp</dimen>
+    <dimen name="margin_hugexxx">65dp</dimen>
+    <dimen name="margin_tiny">1dp</dimen>
+    <dimen name="margin_tinyx">2dp</dimen>
+    <dimen name="margin_tinyxx">3dp</dimen>
+    <dimen name="margin_tinyxxx">4dp</dimen>
+    <dimen name="margin_small">5dp</dimen>
+    <dimen name="margin_smallx">8dp</dimen>
+    <dimen name="margin_smallxx">10dp</dimen>
+    <dimen name="margin_smallxxx">12dp</dimen>
+
+    <dimen name="slidermenu_width">280dp</dimen>
+
+    <dimen name="tab_bar_top_size">45dp</dimen>
+
+    <dimen name="home_layout_top_height">50dp</dimen>
+    <dimen name="home_layout_bottom_height">60dp</dimen>
+
+    <dimen name="home_bottom_btn_mylocation_size">50dp</dimen>
+
+    <dimen name="home_pin_layout_height">122dp</dimen>
+    <dimen name="home_pin_icon_size">100dp</dimen>
+    <dimen name="home_pin_icon_size_half">50dp</dimen>
+    <dimen name="home_pin_loading_size">35dp</dimen>
+
+
+    <dimen name="account_avatar_width">100dp</dimen>
+
+    <dimen name="order_detail_avatar_shiper_size">50dp</dimen>
+
+    <dimen name="chat_avatar_size">40dp</dimen>
 </resources>
