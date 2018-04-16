@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import android.widget.AbsListView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_tone.*
 import vn.miraway.tutone.R
 import vn.miraway.tutone.databinding.FragmentToneBinding
+import vn.miraway.tutone.model.Tone
 import vn.miraway.tutone.network.ToneApi
 import vn.miraway.tutone.views.fragments.BaseFragment
 import javax.inject.Inject
@@ -28,10 +30,11 @@ private const val ARG_PARAM2 = "param2"
  */
 class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
     override fun onScroll(view: AbsListView?, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
-        if (view?.lastVisiblePosition == totalItemCount - 1 && totalItemCount != 0) {
+        if (view?.lastVisiblePosition == totalItemCount - 1 && totalItemCount != 0 && !isLoading) {
             this.page++
             Log.d("scroll_event", "load den cuoi roi $page $firstVisibleItem $visibleItemCount $totalItemCount")
 //            this.loadDataToListView(this.page)
+            isLoading = true
         }
     }
 
@@ -43,10 +46,12 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
     @Inject
     lateinit var toneApi: ToneApi
     var page = 1
+    var isLoading = false
     lateinit var binding: FragmentToneBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+    var realm = Realm.getDefaultInstance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -67,6 +72,9 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
                         { res ->
                             toneAdapter.tones = res!!
                             binding.tones = toneAdapter
+                            realm.beginTransaction()
+                            realm.copyToRealmOrUpdate(res)
+                            realm.commitTransaction()
                         },
                         { err -> Log.d("response_err", err.message) }
                 )

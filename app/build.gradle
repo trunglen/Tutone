@@ -5,14 +5,17 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'realm-android'
 android {
     compileSdkVersion 27
 
     dataBinding {
         enabled = true
     }
-
+    //for realm
+    realm {
+        syncEnabled = true;
+    }
     defaultConfig {
         applicationId "vn.miraway.tutone"
         minSdkVersion 15
@@ -59,6 +62,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     // Data binding notice that the compiler version must be the same than our gradle version
     kapt 'com.android.databinding:compiler:3.1.0'
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'
