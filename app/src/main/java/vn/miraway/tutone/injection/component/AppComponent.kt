@@ -14,6 +14,6 @@ import javax.inject.Singleton
 public interface AppComponent {
     fun retrofit():Retrofit
     fun injectFragment(toneFragment: ToneFragment)
-    fun injectRetrofit(application: Application)
+    fun inject(application: Application)
     fun toneApi():ToneApi
 }

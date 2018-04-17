@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -99,11 +98,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-               val  tones = realm
-                        .where(Tone::class.java)
-                        .`in`("category", arrayOf("Children", "Feature"))
-                        .findAll()
-                Log.d("response_tone", tones.toString())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
@@ -112,6 +106,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         false
     }
-    var realm = Realm.getDefaultInstance()
 
 }

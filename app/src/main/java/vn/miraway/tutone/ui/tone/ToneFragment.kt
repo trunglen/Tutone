@@ -14,6 +14,7 @@ import io.realm.Realm
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.fragment_tone.*
 import vn.miraway.tutone.R
+import vn.miraway.tutone.TutoneApplication
 import vn.miraway.tutone.databinding.FragmentToneBinding
 import vn.miraway.tutone.model.Tone
 import vn.miraway.tutone.network.ToneApi
@@ -41,7 +42,6 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
 
     override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {
         Log.d("scroll_event", scrollState.toString())
-
     }
 
     @Inject
@@ -52,7 +52,6 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-    var realm = Realm.getDefaultInstance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -64,6 +63,8 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
 
     fun loadDataToListView(page: Int) {
         val toneAdapter = ToneAdapter(this.context)
+//        val realm = (activity?.application as TutoneApplication).realm
+//        toneAdapter.tones = realm.where(Tone::class.java).findAll().toList()
         toneApi.getTones()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -80,6 +81,5 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         lvTones.setOnScrollListener(this)
-        Log.d("response_realm", realm.where(Tone::class.java).findAll().toString())
     }
 }
