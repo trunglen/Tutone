@@ -11,6 +11,7 @@ import android.widget.AbsListView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
+import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.fragment_tone.*
 import vn.miraway.tutone.R
 import vn.miraway.tutone.databinding.FragmentToneBinding
@@ -63,7 +64,7 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
 
     fun loadDataToListView(page: Int) {
         val toneAdapter = ToneAdapter(this.context)
-        toneApi.getTones(page, vn.miraway.tutone.common.RECORD_PER_PAGE)
+        toneApi.getTones()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .doOnTerminate { this.stopLoading() }
@@ -72,9 +73,6 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
                         { res ->
                             toneAdapter.tones = res!!
                             binding.tones = toneAdapter
-                            realm.beginTransaction()
-                            realm.copyToRealmOrUpdate(res)
-                            realm.commitTransaction()
                         },
                         { err -> Log.d("response_err", err.message) }
                 )
@@ -82,6 +80,6 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         lvTones.setOnScrollListener(this)
-
+        Log.d("response_realm", realm.where(Tone::class.java).findAll().toString())
     }
 }

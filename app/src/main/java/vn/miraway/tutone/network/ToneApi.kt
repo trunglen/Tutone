@@ -9,5 +9,6 @@ import vn.miraway.tutone.model.Tone
 
 interface ToneApi {
     @GET("tone/list")
-    fun getTones(@Query("page") page: Int=0, @Query("skip") skip: Int=0): Observable<SuccessResponse<List<Tone>>>
+//    fun getTones(@Query("page") page: Int=0, @Query("skip") skip: Int=0): Observable<SuccessResponse<List<Tone>>>
+    fun getTones(): Observable<SuccessResponse<List<Tone>>>
 }

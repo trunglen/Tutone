@@ -21,7 +21,7 @@ open class BaseFragment : Fragment() {
 
     private fun inject() {
         when (this) {
-            is ToneFragment -> injector.inject(this)
+            is ToneFragment -> injector.injectFragment(this)
         }
     }
 

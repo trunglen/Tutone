@@ -1,15 +1,23 @@
 package vn.miraway.tutone.ui
 
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_main.*
+import vn.miraway.tutone.R
+import vn.miraway.tutone.ui.tone.ToneFragment
+import vn.miraway.tutone.model.Tone
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -29,6 +37,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
     }
 
     override fun onBackPressed() {
@@ -58,16 +68,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
+            R.id.nav_children -> {
                 // Handle the camera action
             }
-            R.id.nav_gallery -> {
+            R.id.nav_country -> {
 
             }
-            R.id.nav_slideshow -> {
+            R.id.nav_latin -> {
 
             }
-            R.id.nav_manage -> {
+            R.id.nav_dancing -> {
 
             }
             R.id.nav_share -> {
@@ -81,4 +91,27 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_home -> {
+                supportFragmentManager.beginTransaction().replace(R.id.layoutHolder, ToneFragment()).commit()
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_dashboard -> {
+               val  tones = realm
+                        .where(Tone::class.java)
+                        .`in`("category", arrayOf("Children", "Feature"))
+                        .findAll()
+                Log.d("response_tone", tones.toString())
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_notifications -> {
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
+    var realm = Realm.getDefaultInstance()
+
 }

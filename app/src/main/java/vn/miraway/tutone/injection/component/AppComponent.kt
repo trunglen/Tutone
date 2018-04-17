@@ -1,5 +1,6 @@
 package vn.miraway.tutone.injection.component
 
+import android.app.Application
 import dagger.Component
 import retrofit2.Retrofit
 import vn.miraway.tutone.modules.RestModule
@@ -12,6 +13,7 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(RestModule::class))
 public interface AppComponent {
     fun retrofit():Retrofit
-    fun inject(toneFragment: ToneFragment)
+    fun injectFragment(toneFragment: ToneFragment)
+    fun injectRetrofit(application: Application)
     fun toneApi():ToneApi
 }

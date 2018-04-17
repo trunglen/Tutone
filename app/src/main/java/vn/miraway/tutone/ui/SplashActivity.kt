@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import vn.miraway.tutone.R
-import vn.miraway.tutone.views.activities.HomeActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -15,7 +14,7 @@ class SplashActivity : AppCompatActivity() {
         val handler = Handler()
         handler.postDelayed({
             run {
-                val intent = Intent(this, HomeActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
         },5000)
