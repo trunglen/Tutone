@@ -1,5 +1,6 @@
 package vn.miraway.tutone.ui.dialog
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
@@ -13,7 +14,7 @@ import android.widget.TextView
 import vn.miraway.tutone.R
 import vn.miraway.tutone.model.Tone
 
-class DialogUtil(val context: Context?, val tone: Tone) {
+class DialogUtil(val context: Context?, val tone: Tone, val activity: Activity?) {
     lateinit var btnPlay: ImageButton
     lateinit var btnPause: ImageButton
     lateinit var btnReplay: ImageButton
@@ -51,7 +52,13 @@ class DialogUtil(val context: Context?, val tone: Tone) {
 
         }
         dialog.findViewById<TextView>(R.id.tvName).text = tone.name
-        dialog.show()
+        activity?.runOnUiThread (
+            object :Runnable{
+                override fun run() {
+                    dialog.show()
+                }
+            }
+        )
     }
 
 

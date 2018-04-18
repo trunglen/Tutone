@@ -73,7 +73,7 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
         toneAdapter.tones = realm.where(Tone::class.java).`in`("category", arrayOf(category)).findAll().toList()
         binding.tones = toneAdapter
         binding.lvTones.setOnItemClickListener { parent, view, position, id ->
-            val dialogUtil = DialogUtil(context, toneAdapter.tones.get(position)).showDialog()
+            val dialogUtil = DialogUtil(context, toneAdapter.tones.get(position),activity).showDialog()
         }
 //        toneApi.getTones()
 //                .observeOn(AndroidSchedulers.mainThread())
