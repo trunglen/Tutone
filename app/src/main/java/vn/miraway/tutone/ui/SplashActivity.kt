@@ -53,7 +53,6 @@ class SplashActivity : AppCompatActivity() {
                 .subscribe(
                         { res ->
                             //example
-                            realm = Realm.getDefaultInstance()
                             realm.beginTransaction()
                             realm.copyToRealmOrUpdate(res)
                             realm.commitTransaction()

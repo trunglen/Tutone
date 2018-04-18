@@ -1,18 +1,14 @@
 package vn.miraway.tutone.hub
 
-import io.reactivex.Observable
-import io.reactivex.functions.Consumer
-import io.reactivex.subjects.Subject
+import android.util.Log
+import io.reactivex.subjects.BehaviorSubject
 
 class Hub {
     companion object {
-        var mediaAction = Subject.just(0)
-
+        var mediaAction = BehaviorSubject.create<Int>()
+        fun handleBtn(position: Int) {
+            Log.d("on_send", position.toString())
+            mediaAction.onNext(position)
+        }
     }
-    fun handleBtn(position: Int) {
-        mediaAction.doOnNext(Consumer {
-            position
-        })
-    }
-
 }

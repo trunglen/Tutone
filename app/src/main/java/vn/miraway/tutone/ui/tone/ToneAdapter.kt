@@ -38,7 +38,7 @@ class ToneAdapter(
         }
         val tone = tones.get(position)
         binding?.btnPlay.setOnClickListener { v ->
-            TutoneApplication.hub.handleBtn(position)
+            Hub.handleBtn(position)
             media?.stop()
             media = MediaPlayer.create(this.context, Uri.parse(tone.url))
             media?.start()

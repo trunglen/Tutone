@@ -53,7 +53,6 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
     lateinit var binding: FragmentToneBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        TutoneApplication.hub
         Hub.mediaAction.subscribe { res ->
             Log.d("on_recieve", res.toString())
         }

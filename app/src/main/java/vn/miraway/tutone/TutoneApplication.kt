@@ -47,6 +47,10 @@ class TutoneApplication : Application() {
                         .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
                         .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
                         .build());
+        val realm = Realm.getDefaultInstance()
+        realm.beginTransaction()
+        realm.deleteAll()
+        realm.commitTransaction()
     }
 
     fun injector(): AppComponent {
