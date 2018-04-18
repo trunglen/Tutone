@@ -20,6 +20,7 @@ import vn.miraway.tutone.databinding.FragmentToneBinding
 import vn.miraway.tutone.hub.Hub
 import vn.miraway.tutone.model.Tone
 import vn.miraway.tutone.network.ToneApi
+import vn.miraway.tutone.ui.dialog.DialogUtil
 import vn.miraway.tutone.views.fragments.BaseFragment
 import javax.inject.Inject
 
@@ -56,8 +57,6 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
         Hub.mediaAction.subscribe { res ->
             Log.d("on_recieve", res.toString())
         }
-
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -74,8 +73,7 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
         toneAdapter.tones = realm.where(Tone::class.java).`in`("category", arrayOf(category)).findAll().toList()
         binding.tones = toneAdapter
         binding.lvTones.setOnItemClickListener { parent, view, position, id ->
-            Log.d("click", view.id.toString() + btnPlay.toString())
-            btnPlay.visibility = View.GONE
+            val dialogUtil = DialogUtil(context, toneAdapter.tones.get(position)).showDialog()
         }
 //        toneApi.getTones()
 //                .observeOn(AndroidSchedulers.mainThread())

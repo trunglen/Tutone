@@ -28,23 +28,6 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal">
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_play_button_36dp"
-                android:id="@+id/btnPlay"/>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_pause_36dp"
-                android:id="@+id/btnPause"
-                android:visibility="gone"
-                />
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_replay_36dp"
-                android:id="@+id/btnReplay"/>
         </LinearLayout>
     </LinearLayout>
 </layout>

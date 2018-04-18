@@ -37,25 +37,6 @@ class ToneAdapter(
             binding = convertView.tag as ItemToneBinding
         }
         val tone = tones.get(position)
-        binding?.btnPlay.setOnClickListener { v ->
-            Hub.handleBtn(position)
-            media?.stop()
-            media = MediaPlayer.create(this.context, Uri.parse(tone.url))
-            media?.start()
-            v.visibility = View.GONE
-            binding?.btnPause.visibility = View.VISIBLE
-        }
-
-        binding?.btnPause.setOnClickListener { v ->
-            media?.pause()
-            v.visibility = View.GONE
-            binding?.btnPlay.visibility = View.VISIBLE
-        }
-        binding?.btnReplay.setOnClickListener {
-            media?.stop()
-            media = MediaPlayer.create(this.context, Uri.parse(tone.url))
-            media?.start()
-        }
         binding?.tone = getItem(position) as Tone
         return binding.root
     }
