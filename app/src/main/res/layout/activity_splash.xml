@@ -6,11 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.SplashActivity"
-    android:layout_gravity="center">
-    <ImageView
+    android:gravity="center">
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/logo"-->
+        <!--android:contentDescription="TODO" />-->
+    <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo"
-        android:contentDescription="TODO" />
+        android:minWidth="@dimen/home_pin_loading_size"
+        android:id="@+id/pgbLoading" />
 
 </LinearLayout>

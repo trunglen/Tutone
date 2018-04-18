@@ -13,9 +13,11 @@ import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
 import io.realm.kotlin.where
 import kotlinx.android.synthetic.main.fragment_tone.*
+import kotlinx.android.synthetic.main.item_tone.*
 import vn.miraway.tutone.R
 import vn.miraway.tutone.TutoneApplication
 import vn.miraway.tutone.databinding.FragmentToneBinding
+import vn.miraway.tutone.hub.Hub
 import vn.miraway.tutone.model.Tone
 import vn.miraway.tutone.network.ToneApi
 import vn.miraway.tutone.views.fragments.BaseFragment
@@ -51,32 +53,43 @@ class ToneFragment : BaseFragment(), AbsListView.OnScrollListener {
     lateinit var binding: FragmentToneBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        TutoneApplication.hub
+        Hub.mediaAction.subscribe { res ->
+            Log.d("on_recieve", res.toString())
+        }
+
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate<FragmentToneBinding>(inflater, R.layout.fragment_tone, container, false)
         this.loadDataToListView(this.page)
-//        return inflater.inflate(R.layout.fragment_tone, container, false)
         return binding.root
     }
 
     fun loadDataToListView(page: Int) {
         val toneAdapter = ToneAdapter(this.context)
-//        val realm = (activity?.application as TutoneApplication).realm
-//        toneAdapter.tones = realm.where(Tone::class.java).findAll().toList()
-        toneApi.getTones()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .doOnTerminate { this.stopLoading() }
-                .map { res -> res.data }
-                .subscribe(
-                        { res ->
-                            toneAdapter.tones = res!!
-                            binding.tones = toneAdapter
-                        },
-                        { err -> Log.d("response_err", err.message) }
-                )
+        val category = arguments?.get("category").toString()
+        Log.d("category", category)
+        toneAdapter.tones = realm.where(Tone::class.java).`in`("category", arrayOf(category)).findAll().toList()
+        binding.tones = toneAdapter
+        binding.lvTones.setOnItemClickListener { parent, view, position, id ->
+            Log.d("click", view.id.toString() + btnPlay.toString())
+            btnPlay.visibility = View.GONE
+        }
+//        toneApi.getTones()
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.io())
+//                .doOnTerminate { this.stopLoading() }
+//                .map { res -> res.data }
+//                .subscribe(
+//                        { res ->
+//                            toneAdapter.tones = res!!
+//                            binding.tones = toneAdapter
+//                        },
+//                        { err -> Log.d("response_err", err.message) }
+//                )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

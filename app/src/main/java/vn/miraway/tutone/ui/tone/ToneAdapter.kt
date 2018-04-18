@@ -8,19 +8,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
+import android.widget.ListView
+import vn.miraway.tutone.TutoneApplication
 import vn.miraway.tutone.databinding.ItemToneBinding
+import vn.miraway.tutone.hub.Hub
 import vn.miraway.tutone.model.Tone
 
 class ToneAdapter(
         private val context: Context?
 ) : BaseAdapter() {
-    init {
-        Log.d("ToneAdapter", "init")
-    }
+
     companion object {
         var media: MediaPlayer? = null
+        var trial = println("ToneAdapter")
     }
+
+    var selectedTone = 0
     var tones: List<Tone> = emptyList()
+    var hub: Hub = Hub()
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val binding: ItemToneBinding
         if (convertView == null) {
@@ -30,22 +37,24 @@ class ToneAdapter(
             binding = convertView.tag as ItemToneBinding
         }
         val tone = tones.get(position)
-        binding?.btnPlay.setOnClickListener {
+        binding?.btnPlay.setOnClickListener { v ->
+            TutoneApplication.hub.handleBtn(position)
+            media?.stop()
             media = MediaPlayer.create(this.context, Uri.parse(tone.url))
             media?.start()
+            v.visibility = View.GONE
+            binding?.btnPause.visibility = View.VISIBLE
         }
-        binding?.btnPause.setOnClickListener {
-            if (media != null) {
-                if (media!!.isPlaying) {
-                    media?.pause()
-                }
-            }
+
+        binding?.btnPause.setOnClickListener { v ->
+            media?.pause()
+            v.visibility = View.GONE
+            binding?.btnPlay.visibility = View.VISIBLE
         }
         binding?.btnReplay.setOnClickListener {
-            if (media == null) {
-                media = MediaPlayer.create(this.context, Uri.parse(tone.url))
-            }
-            media?.reset()
+            media?.stop()
+            media = MediaPlayer.create(this.context, Uri.parse(tone.url))
+            media?.start()
         }
         binding?.tone = getItem(position) as Tone
         return binding.root
@@ -56,4 +65,6 @@ class ToneAdapter(
     override fun getItemId(position: Int): Long = 0
 
     override fun getCount(): Int = tones.size
+
+
 }

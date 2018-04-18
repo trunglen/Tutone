@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -24,7 +25,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
@@ -34,12 +34,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-
         nav_view.setNavigationItemSelectedListener(this)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
+        showToneFragment("recent")
     }
 
+    var realm = Realm.getDefaultInstance()
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -68,16 +68,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_children -> {
-                // Handle the camera action
+                showToneFragment("children")
             }
             R.id.nav_country -> {
-
+                showToneFragment("country")
             }
             R.id.nav_latin -> {
-
+                showToneFragment("latin")
             }
             R.id.nav_dancing -> {
-
+                showToneFragment("dance")
             }
             R.id.nav_share -> {
 
@@ -91,16 +91,32 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+    private lateinit var toneFragment :ToneFragment
+
+    fun passCategory(category: String) {
+        var bundle = Bundle()
+        bundle.putString("category", category)
+        toneFragment.arguments = bundle
+    }
+
+    fun showToneFragment(category:String) {
+        toneFragment = ToneFragment()
+        passCategory(category)
+        supportFragmentManager.beginTransaction().replace(R.id.layoutHolder, toneFragment).commit()
+    }
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        var bundle = Bundle()
         when (item.itemId) {
-            R.id.navigation_home -> {
-                supportFragmentManager.beginTransaction().replace(R.id.layoutHolder, ToneFragment()).commit()
+            R.id.navigation_recent -> {
+                showToneFragment("recent")
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
+            R.id.navigation_featured -> {
+                showToneFragment("featured")
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_notifications -> {
+            R.id.navigation_popular -> {
+                showToneFragment("popular")
                 return@OnNavigationItemSelectedListener true
             }
         }
