@@ -25,17 +25,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         showToneFragment("recent")
     }
 
@@ -79,14 +74,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_dancing -> {
                 showToneFragment("dance")
             }
-            R.id.nav_share -> {
-
+            R.id.navigation_featured -> {
+                showToneFragment("featured")
             }
-            R.id.nav_send -> {
-
+            R.id.navigation_popular -> {
+                showToneFragment("popular")
+            }
+            R.id.navigation_recent-> {
+                showToneFragment("recent")
             }
         }
-
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
@@ -103,24 +100,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toneFragment = ToneFragment()
         passCategory(category)
         supportFragmentManager.beginTransaction().replace(R.id.layoutHolder, toneFragment).commit()
-    }
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        var bundle = Bundle()
-        when (item.itemId) {
-            R.id.navigation_recent -> {
-                showToneFragment("recent")
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_featured -> {
-                showToneFragment("featured")
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_popular -> {
-                showToneFragment("popular")
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
     }
 
 }
