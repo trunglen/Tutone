@@ -73,7 +73,6 @@ dependencies {
     implementation 'com.uphyca:stetho_realm:2.1.0' //plugin debug for realm
 
 
-
 }
 
 apply plugin: 'com.google.gms.google-services'
